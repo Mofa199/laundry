@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 
-// Define the API base URL
-const API_BASE_URL = 'http://localhost:30021';
+// Define the API base URL - use relative path for production
+const API_BASE_URL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:30021';
 
 function AdminLogin({ onLogin }) {
   const [username, setUsername] = useState('');

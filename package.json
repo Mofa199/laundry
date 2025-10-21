@@ -1,0 +1,41 @@
+{
+  "name": "laundry-website",
+  "description": "A modern laundry service website with responsive design and admin functionality",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "keywords": [
+    "laundry",
+    "react",
+    "animations",
+    "ecommerce"
+  ],
+  "author": "Laundry Team",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "dev:full": "concurrently \"npm run dev\" \"cd backend && npm run dev\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node test-server.js",
+    "start:backend": "cd backend && npm start",
+    "vercel-build": "npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "vite": "^7.1.7"
+  },
+  "dependencies": {
+    "express": "^4.21.1",
+    "cors": "^2.8.5",
+    "nodemailer": "^6.9.15",
+    "dotenv": "^16.4.5",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.3",
+    "serverless-http": "^3.2.0",
+    "gsap": "^3.13.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.4"
+  }
+}

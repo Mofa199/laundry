@@ -3,6 +3,7 @@
   "description": "A modern laundry service website with responsive design and admin functionality",
   "version": "1.0.0",
   "type": "module",
+  "main": "server.js",
   "keywords": [
     "laundry",
     "react",
@@ -16,6 +17,7 @@
     "dev:full": "concurrently \"npm run dev\" \"cd backend && npm run dev\"",
     "build": "vite build",
     "preview": "vite preview",
+    "start": "node test-server.js",
     "start:backend": "cd backend && npm start",
     "vercel-build": "npm run build"
   },

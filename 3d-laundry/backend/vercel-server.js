@@ -24,6 +24,9 @@ const JWT_SECRET = process.env.JWT_SECRET || 'laundry_admin_secret_key';
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from the dist folder
+app.use(express.static(path.join(__dirname, '../dist')));
+
 // Create transporter for nodemailer with error handling
 let transporter;
 let emailEnabled = true;
@@ -93,6 +96,16 @@ const authenticateAdmin = (req, res, next) => {
     return res.status(401).json({ message: 'Invalid token' });
   }
 };
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'OK', 
+    message: 'Server is running',
+    database: pool ? 'Connected' : 'Not connected',
+    email: emailEnabled ? 'Enabled' : 'Disabled'
+  });
+});
 
 // Admin login endpoint
 router.post('/admin/login', async (req, res) => {
@@ -448,19 +461,14 @@ router.get('/reports/:type', authenticateAdmin, async (req, res) => {
   }
 });
 
-// Health check endpoint
-router.get('/health', (req, res) => {
-  res.status(200).json({ 
-    status: 'OK', 
-    message: 'Server is running',
-    database: pool ? 'Connected' : 'Not connected',
-    email: emailEnabled ? 'Enabled' : 'Disabled'
-  });
-});
-
 // Use the router for API routes
 app.use('/api', router);
 
+// Handle all other routes by serving index.html (for React Router)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
+
 // Export the app for Vercel
-export default app;
+export { app };
 export const handler = serverless(app);
